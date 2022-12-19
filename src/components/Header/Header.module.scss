@@ -1,0 +1,24 @@
+.header {
+  background-color: var(--white-color);
+  padding: 3rem 0;
+  box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.1);
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 3rem;
+      font-weight: bold;
+      align-items: center;
+      svg {
+        position: relative;
+        top: -0.2rem;
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
+}
