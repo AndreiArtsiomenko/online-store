@@ -39,7 +39,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className='container'>
       <h1>Home</h1>
       {products.length > 0 && <ProductList products={products} typeCard={typeCard} />}
       {isLoading && <span>Loading...</span>}
