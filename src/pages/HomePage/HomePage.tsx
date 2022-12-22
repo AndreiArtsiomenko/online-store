@@ -10,7 +10,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [typeCard, setTypeCard] = useState<CardType>('vertical');
+  const [typeCard, setTypeCard] = useState<CardType>('horizontal');
 
   const fetchData = async (): Promise<void> => {
     try {
