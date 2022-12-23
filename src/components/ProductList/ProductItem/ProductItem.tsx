@@ -11,7 +11,8 @@ interface ProductItemProps {
 }
 
 const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
-  return <div className={styles.wrapper}>
+  const isVertical = typeCard === 'vertical'
+  return <div className={isVertical ? cn(styles.wrapper, styles.item_vertical) : cn(styles.wrapper, styles.item_horizontal)}>
     <div className={styles.box_img}>
       <img className={styles.img} src={product.images[0]} alt={product.title} />
     </div>
