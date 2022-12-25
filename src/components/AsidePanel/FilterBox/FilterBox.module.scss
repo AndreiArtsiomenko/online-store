@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--primary-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  .title {
+    text-align: center;
+    font-weight: bold;
+    color: var(--white-color);
+    padding: 0.5rem 0;
+    background-color: var(--primary-color);
+  }
+  .list {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 20rem;
+    overflow: hidden;
+    overflow-y: scroll;
+    .list_item {
+      display: flex;
+      justify-content: space-between;
+
+      .label {
+        display: flex;
+        gap: 0.5rem;
+        text-transform: capitalize;
+
+        .input {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+}

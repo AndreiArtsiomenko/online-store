@@ -1,5 +1,5 @@
 import { Product } from '../models/product.model';
-type CategoryType = Record<string, { title: string; count: number }>;
+export type CategoryType = Record<string, { title: string; count: number; findCount: number }>;
 export const sortOptions = [
   {
     id: 1,
@@ -44,7 +44,10 @@ export const getProductsBySearch = (products: Product[], searchParam: string): P
   });
 };
 
-export const getBrandsAndCategories = (products: Product[]): { categories: CategoryType; brands: CategoryType } => {
+export const getBrandsAndCategories = (
+  products: Product[],
+  finalyProducts: Product[],
+): { categories: CategoryType; brands: CategoryType } => {
   const categories: CategoryType = {};
   const brands: CategoryType = {};
 
@@ -57,6 +60,7 @@ export const getBrandsAndCategories = (products: Product[]): { categories: Categ
       categories[product.category.toLowerCase()] = {
         title: product.category.toLowerCase(),
         count: 1,
+        findCount: 0,
       };
     }
     if (brandItem) {
@@ -65,7 +69,18 @@ export const getBrandsAndCategories = (products: Product[]): { categories: Categ
       brands[product.brand.toLowerCase()] = {
         title: product.brand.toLowerCase(),
         count: 1,
+        findCount: 0,
       };
+    }
+  });
+  finalyProducts.forEach((product) => {
+    const brand = brands[product.brand.toLowerCase()];
+    const category = categories[product.category.toLowerCase()];
+    if (brand) {
+      brand.findCount = brand.findCount + 1;
+    }
+    if (category) {
+      category.findCount = category.findCount + 1;
     }
   });
   return { categories, brands };

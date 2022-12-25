@@ -1,0 +1,12 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 30rem 1fr;
+  padding: 1rem 0;
+  gap: 1rem;
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
