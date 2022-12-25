@@ -33,15 +33,15 @@ const sortOption = [
 
 const ProductTopFilter: FC<ProductTopFilterProps> = ({ products, setProducts }) => {
 
-  const [selectedSort, setSelectedSort] = useState('')
+  const [selectedSort, setSelectedSort] = useState('Sort options:')
 
   const sortProducts = (sort: string): void => {
     setSelectedSort(sort)
-    const sortArr: string[] = sort.split('_')
-    if (sortArr[1] === 'ASC') {
-      setProducts([...products].sort((a, b) => a[sortArr[0]] - b[sortArr[0]]))
+    const [key, type] = sort.split('_') as [key: 'price'| 'rating', type: string]
+    if (type === 'ASC') {
+      setProducts([...products].sort((a, b) => a[key] - b[key]))
     } else {
-      setProducts([...products].sort((a, b) => b[sortArr[0]] - a[sortArr[0]]))
+      setProducts([...products].sort((a, b) => b[key] - a[key]))
     }
   }
 
