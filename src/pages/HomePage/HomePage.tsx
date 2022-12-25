@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
+import ProductTopFilter from '../../components/ProductList/ProductTopFilter/ProductTopFilter';
 import { Product, ResponseProduct } from '../../models/product.model';
 import { CardType } from '../../types/common.types';
 import styles from './HomePage.module.scss';
@@ -10,7 +11,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [typeCard, setTypeCard] = useState<CardType>('horizontal');
+  const [typeCard, setTypeCard] = useState<CardType>('vertical');
 
   const fetchData = async (): Promise<void> => {
     try {
@@ -41,6 +42,7 @@ const HomePage = () => {
   return (
     <div className='container'>
       <h1>Home</h1>
+      <ProductTopFilter products={products} setProducts={setProducts} />
       {products.length > 0 && <ProductList products={products} typeCard={typeCard} />}
       {isLoading && <span>Loading...</span>}
       {error && <span>Something went wrong!</span>}

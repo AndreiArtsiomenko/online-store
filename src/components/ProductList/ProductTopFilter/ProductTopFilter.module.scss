@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba($color: #000000, $alpha: 0.16);
+  background-color: var(--white-color);
+}
