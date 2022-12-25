@@ -1,5 +1,13 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+
+.list_vertical {
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+}
+
+.list_horizontal {
+  grid-template-columns: 1fr;
+}
+
