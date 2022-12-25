@@ -42,7 +42,7 @@ const HomePage = () => {
   return (
     <div className='container'>
       <h1>Home</h1>
-      <ProductTopFilter products={products} />
+      <ProductTopFilter products={products} setProducts={setProducts} />
       {products.length > 0 && <ProductList products={products} typeCard={typeCard} />}
       {isLoading && <span>Loading...</span>}
       {error && <span>Something went wrong!</span>}

@@ -8,17 +8,17 @@ interface SortSelectProps {
   }[]
   defaultValue: string
   value: string
-  onChange: (sort:string) => void
+  onChange: (sort: string) => void
 }
 
 const SortSelect: FC<SortSelectProps> = ({ options, defaultValue, value, onChange }) => {
   return (
-    <select 
+    <select
       value={value}
-      onChange = {e => onChange(e.target.value)}
+      onChange={e => onChange(e.target.value)}
     >
-      <option disabled selected >{defaultValue}</option>
-      {options.map(option => 
+      <option disabled >{defaultValue}</option>
+      {options.map(option =>
         <option key={option.id} value={option.value}>{option.name}</option>)}
     </select>
   );

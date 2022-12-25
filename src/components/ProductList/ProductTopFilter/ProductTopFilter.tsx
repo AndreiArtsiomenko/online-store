@@ -5,10 +5,11 @@ import style from './ProductTopFilter.module.scss'
 
 interface ProductTopFilterProps {
   products: Product[]
+  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 const sortOption = [
-  { 
+  {
     id: 1,
     value: 'price_ASC',
     name: 'Sort by price ASC',
@@ -28,28 +29,25 @@ const sortOption = [
     value: 'rating_DESC',
     name: 'Sort by rating DESC'
   },
-  {
-    id: 5,
-    value: 'discount_ASC',
-    name: 'Sort by discount ASC',
-  },
-  {
-    id: 6,
-    value: 'discount_DESC',
-    name: 'Sort by discount DESC'
-  }
 ]
 
-const [selectedSort, setSelectedSort] = useState('')
+const ProductTopFilter: FC<ProductTopFilterProps> = ({ products, setProducts }) => {
 
-const sortProducts = (sort:string) => {
-  setSelectedSort(sort)
-}
+  const [selectedSort, setSelectedSort] = useState('')
 
-const ProductTopFilter: FC<ProductTopFilterProps>= ({products}) => {
+  const sortProducts = (sort: string): void => {
+    setSelectedSort(sort)
+    const sortArr: string[] = sort.split('_')
+    if (sortArr[1] === 'ASC') {
+      setProducts([...products].sort((a, b) => a[sortArr[0]] - b[sortArr[0]]))
+    } else {
+      setProducts([...products].sort((a, b) => b[sortArr[0]] - a[sortArr[0]]))
+    }
+  }
+
   return (
     <div className={style.wrapper}>
-      <SortSelect 
+      <SortSelect
         value={selectedSort}
         onChange={sortProducts}
         defaultValue='Sort options:'
