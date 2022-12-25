@@ -3,7 +3,7 @@ import { Product } from '../../models/product.model';
 import { CardType } from '../../types/common.types';
 import ProductItem from './ProductItem/ProductItem';
 import styles from './ProductList.module.scss';
-import cn from 'classnames'
+import cn from 'classnames';
 
 interface ProductListProps {
   products: Product[];
@@ -11,13 +11,14 @@ interface ProductListProps {
 }
 
 const ProductList: FC<ProductListProps> = ({ products, typeCard }) => {
-  const isVertical = typeCard === 'vertical'
+  const isVertical = typeCard === 'vertical';
   return (
-    <div className={isVertical ? cn(styles.wrapper, styles.list_vertical) : cn(styles.wrapper, styles.list_horizontal)} >
-      { products.map((product) => (
+    <div className={isVertical ? cn(styles.wrapper, styles.list_vertical) : cn(styles.wrapper, styles.list_horizontal)}>
+      {products.map((product) => (
         <ProductItem key={product.id} product={product} typeCard={typeCard} />
       ))}
-    </div >
+      {products.length === 0 && <h2>Products not found</h2>}
+    </div>
   );
 };
 export default ProductList;
