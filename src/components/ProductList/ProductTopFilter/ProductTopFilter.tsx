@@ -1,63 +1,58 @@
-import { FC, useState } from 'react';
-import { Product } from '../../../models/product.model';
-import SortSelect from '../../ui/selects/SortSelect';
-import style from './ProductTopFilter.module.scss'
+import { FC } from 'react';
+import { sortOptions } from '../../../helpers/filters.data';
+import { CardType } from '../../../types/common.types';
+import Button from '../../ui/buttons/Button';
+import Input from '../../ui/Input/Input';
+import Select from '../../ui/selects/Select';
+import style from './ProductTopFilter.module.scss';
 
 interface ProductTopFilterProps {
-  products: Product[]
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>
+  productsCount: number;
+  setSortParam: (param: string) => void;
+  sortParam: string;
+  searchParam: string;
+  setSearchParam: (param: string) => void;
+  typeCard: string;
+  setTypeCard: (val: CardType) => void;
 }
-
-const sortOption = [
-  {
-    id: 1,
-    value: 'price_ASC',
-    name: 'Sort by price ASC',
-  },
-  {
-    id: 2,
-    value: 'price_DESC',
-    name: 'Sort by price DESC'
-  },
-  {
-    id: 3,
-    value: 'rating_ASC',
-    name: 'Sort by rating ASC',
-  },
-  {
-    id: 4,
-    value: 'rating_DESC',
-    name: 'Sort by rating DESC'
-  },
-]
-
-const ProductTopFilter: FC<ProductTopFilterProps> = ({ products, setProducts }) => {
-
-  const [selectedSort, setSelectedSort] = useState('Sort options:')
-
-  const sortProducts = (sort: string): void => {
-    setSelectedSort(sort)
-    const [key, type] = sort.split('_') as [key: 'price'| 'rating', type: string]
-    if (type === 'ASC') {
-      setProducts([...products].sort((a, b) => a[key] - b[key]))
-    } else {
-      setProducts([...products].sort((a, b) => b[key] - a[key]))
-    }
-  }
-
+const ProductTopFilter: FC<ProductTopFilterProps> = ({
+  productsCount,
+  setSortParam,
+  sortParam,
+  searchParam,
+  setSearchParam,
+  setTypeCard,
+  typeCard,
+}) => {
   return (
     <div className={style.wrapper}>
-      <SortSelect
-        value={selectedSort}
-        onChange={sortProducts}
-        defaultValue='Sort options:'
-        options={sortOption}
+      <Select
+        placeholder="Sort by"
+        options={sortOptions}
+        onChange={(e) => setSortParam(e.target.value)}
+        value={sortParam}
       />
-      <div>Found: {products.length}</div>
-      <input type="text" />
+      <div>Found: {productsCount}</div>
+      <Input value={searchParam} placeholder="Search query" onChange={(e) => setSearchParam(e.target.value)} />
       <div className={style.viewModeForm}>
-        <button></button>
-        <button></button>
+        <Button onClick={() => setTypeCard('horizontal')}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M3 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 5.25zm0 4.5A.75.75 0 013.75 9h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 9.75zm0 4.5a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75zm0 4.5a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Button>
+        <Button onClick={() => setTypeCard('vertical')}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              fillRule="evenodd"
+              d="M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </Button>
       </div>
     </div>
   );
