@@ -8,6 +8,7 @@ import { CardType } from '../../types/common.types';
 import styles from './HomePage.module.scss';
 import cn from 'classnames';
 import AsidePanel from '../../components/AsidePanel/AsidePanel';
+
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -16,12 +17,20 @@ const HomePage = () => {
   const [sortParam, setSortParam] = useState<string>('');
   const [searchParam, setSearchParam] = useState<string>('');
   const [categoryParam, setCategoryParam] = useState<string[]>([]);
+  const [brandParam, setBrandParam] = useState<string[]>([]);
 
   const sortedProducts = sortProducts(products, sortParam);
+  
+  const productByBrand =
+    brandParam.length > 0
+      ? sortedProducts.filter((product) => brandParam.includes(product.brand.toLocaleLowerCase()))
+      : sortedProducts;
+
   const productByCategory =
     categoryParam.length > 0
-      ? sortedProducts.filter((product) => categoryParam.includes(product.category))
-      : sortedProducts;
+      ? productByBrand.filter((product) => categoryParam.includes(product.category))
+      : productByBrand;
+
   const searchedProduct = getProductsBySearch(productByCategory, searchParam);
 
   const { brands, categories } = getBrandsAndCategories(products, searchedProduct);
@@ -30,6 +39,7 @@ const HomePage = () => {
     setSortParam('');
     setSearchParam('');
     setCategoryParam([]);
+    setBrandParam([]);
   };
 
   const fetchData = async (): Promise<void> => {
@@ -63,6 +73,9 @@ const HomePage = () => {
               categories={categories}
               categoryParam={categoryParam}
               setCategoryParam={setCategoryParam}
+              brands={brands}
+              brandParam={brandParam}
+              setBrandParam={setBrandParam}
             />
           </aside>
           <div className={styles.right}>
