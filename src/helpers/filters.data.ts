@@ -46,7 +46,7 @@ export const getProductsBySearch = (products: Product[], searchParam: string): P
 
 export const getBrandsAndCategories = (
   products: Product[],
-  finalyProducts: Product[],
+  finallyProducts: Product[],
 ): { categories: CategoryType; brands: CategoryType } => {
   const categories: CategoryType = {};
   const brands: CategoryType = {};
@@ -73,7 +73,7 @@ export const getBrandsAndCategories = (
       };
     }
   });
-  finalyProducts.forEach((product) => {
+  finallyProducts.forEach((product) => {
     const brand = brands[product.brand.toLowerCase()];
     const category = categories[product.category.toLowerCase()];
     if (brand) {
