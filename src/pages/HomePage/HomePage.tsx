@@ -1,13 +1,22 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
 import ProductTopFilter from '../../components/ProductList/ProductTopFilter/ProductTopFilter';
-import { getBrandsAndCategories, getProductByPrice, getProductByStock, getProductsBySearch, sortProducts } from '../../helpers/filters.data';
+import {
+  getBrandsAndCategories,
+  getProductByPriceByStock,
+  getProductsBySearch,
+  sortProducts,
+} from '../../helpers/filters.data';
 import { Product, ResponseProduct } from '../../models/product.model';
 import { CardType } from '../../types/common.types';
 import styles from './HomePage.module.scss';
 import cn from 'classnames';
 import AsidePanel from '../../components/AsidePanel/AsidePanel';
+
+export type DualSliderValueType = [number, number];
+
+const initialDualSliderValue: DualSliderValueType = [0, 0];
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -18,25 +27,47 @@ const HomePage = () => {
   const [searchParam, setSearchParam] = useState<string>('');
   const [categoryParam, setCategoryParam] = useState<string[]>([]);
   const [brandParam, setBrandParam] = useState<string[]>([]);
-  const [priceParam, setPriceParam] = useState<string[]>(['0', '1800'])
-  const [stockParam, setStockParam] = useState<string[]>(['0', '155'])
+  const [priceParam, setPriceParam] = useState<DualSliderValueType>(initialDualSliderValue);
+  const [stockParam, setStockParam] = useState<DualSliderValueType>(initialDualSliderValue);
+
+  const { minMaxPrice, minMaxStock } = useMemo(() => {
+    const priceValues = products.map((product) => product.price);
+    const stockValues = products.map((product) => product.stock);
+
+    const minMaxPrice = {
+      min: Math.min(...priceValues),
+      max: Math.max(...priceValues),
+    };
+
+    const minMaxStock = {
+      min: Math.min(...stockValues),
+      max: Math.max(...stockValues),
+    };
+    setPriceParam([minMaxPrice.min, minMaxPrice.max]);
+    setStockParam([minMaxStock.min, minMaxStock.max]);
+    return {
+      minMaxPrice,
+      minMaxStock,
+    };
+  }, [products]);
 
   const sortedProducts = sortProducts(products, sortParam);
-  
+
+  const productByPriceByStock = getProductByPriceByStock(sortedProducts, priceParam, stockParam);
+
   const productByBrand =
     brandParam.length > 0
-      ? sortedProducts.filter((product) => brandParam.includes(product.brand.toLocaleLowerCase()))
-      : sortedProducts;
+      ? productByPriceByStock.filter((product) => brandParam.includes(product.brand.toLocaleLowerCase()))
+      : productByPriceByStock;
 
   const productByCategory =
     categoryParam.length > 0
       ? productByBrand.filter((product) => categoryParam.includes(product.category))
       : productByBrand;
 
-  const { productByPrice, minPrice, maxPrice } = getProductByPrice(productByCategory, priceParam)
-  const { productByStock, minStock, maxStock } = getProductByStock(productByPrice, stockParam)
+  const searchedProduct = getProductsBySearch(productByCategory, searchParam);
 
-  const searchedProduct = getProductsBySearch(productByStock, searchParam);
+  // useEffect(() => {}, [searchedProduct]);
 
   const { brands, categories } = getBrandsAndCategories(products, searchedProduct);
 
@@ -45,6 +76,8 @@ const HomePage = () => {
     setSearchParam('');
     setCategoryParam([]);
     setBrandParam([]);
+    setPriceParam([minMaxPrice.min, minMaxPrice.max]);
+    setStockParam([minMaxStock.min, minMaxStock.max]);
   };
 
   const fetchData = async (): Promise<void> => {
@@ -83,12 +116,10 @@ const HomePage = () => {
               setBrandParam={setBrandParam}
               priceParam={priceParam}
               setPriceParam={setPriceParam}
-              minPrice={minPrice}
-              maxPrice={maxPrice}
               stockParam={stockParam}
               setStockParam={setStockParam}
-              minStock={minStock}
-              maxStock={maxStock}
+              minMaxPrice={minMaxPrice}
+              minMaxStock={minMaxStock}
             />
           </aside>
           <div className={styles.right}>

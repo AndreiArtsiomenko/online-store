@@ -15,7 +15,7 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   return (
     <div className={cn(styles.wrapper, { [styles.item_horizontal]: !isVertical, [styles.item_vertical]: isVertical })}>
       <div className={styles.box_img}>
-        <img className={styles.img} src={product.images[0]} alt={product.title} />
+        <img className={styles.img} src={product.thumbnail} alt={product.title} />
       </div>
 
       <div className={cn(styles.card__item, styles.title)}>

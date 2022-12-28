@@ -86,35 +86,19 @@ export const getBrandsAndCategories = (
   return { categories, brands };
 };
 
+export const getProductByPriceByStock = (
+  products: Product[],
+  priceParams: [number, number],
+  stockParams: [number, number],
+): Product[] => {
+  const minPrice = Math.min(...priceParams);
+  const maxPrice = Math.max(...priceParams);
+  const minStock = Math.min(...stockParams);
+  const maxStock = Math.max(...stockParams);
 
-export const getProductByPrice = (
-  products: Product[], 
-  priceParam: string[]): { 
-    productByPrice: Product[], 
-    minPrice: number, 
-    maxPrice: number
-  } => {
-  const minPriceParam = Math.min(...priceParam.map(e => +e))
-  const maxPriceParam = Math.max(...priceParam.map(e => +e))
-  const productByPrice = products.filter(product => minPriceParam <= product.price && product.price <= maxPriceParam)
-  const minPrice = Math.min(...productByPrice.map(product => +product.price))
-  const maxPrice = Math.max(...productByPrice.map(product => +product.price))
-
-  return { productByPrice, minPrice, maxPrice }
-}
-
-export const getProductByStock = (
-  products: Product[], 
-  stockParam: string[]): { 
-    productByStock: Product[], 
-    minStock: number, 
-    maxStock: number
-  } => {
-  const minStockParam = Math.min(...stockParam.map(e => +e))
-  const maxStockParam = Math.max(...stockParam.map(e => +e))
-  const productByStock = products.filter(product => minStockParam <= product.stock && product.stock <= maxStockParam)
-  const minStock = Math.min(...productByStock.map(product => +product.stock))
-  const maxStock = Math.max(...productByStock.map(product => +product.stock))
-
-  return { productByStock, minStock, maxStock }
-}
+  const filteredProducts = products.filter(
+    (product) =>
+      product.price >= minPrice && product.price <= maxPrice && product.stock >= minStock && product.stock <= maxStock,
+  );
+  return filteredProducts;
+};
