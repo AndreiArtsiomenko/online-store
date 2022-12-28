@@ -4,6 +4,7 @@ import { CardType } from '../../../types/common.types';
 import styles from './ProductItem.module.scss';
 import cn from 'classnames';
 import Button from '../../ui/buttons/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductItemProps {
   typeCard: CardType;
@@ -12,8 +13,12 @@ interface ProductItemProps {
 
 const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   const isVertical = typeCard === 'vertical';
+  const navigate = useNavigate();
   return (
-    <div className={cn(styles.wrapper, { [styles.item_horizontal]: !isVertical, [styles.item_vertical]: isVertical })}>
+    <div
+      onClick={() => navigate(`products/${product.id}`)}
+      className={cn(styles.wrapper, { [styles.item_horizontal]: !isVertical, [styles.item_vertical]: isVertical })}
+    >
       <div className={styles.box_img}>
         <img className={styles.img} src={product.thumbnail} alt={product.title} />
       </div>
@@ -31,7 +36,7 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
       </div>
       <div className={styles.product_buy}>
         <div className={styles.price}>€{product.price}</div>
-        <Button>Add to cart</Button>
+        <Button onClick={(e) => e.stopPropagation()}>Add to cart</Button>
       </div>
       <div className={styles.card__info}>
         <div className={cn(styles.card__item, styles.rating)}>
