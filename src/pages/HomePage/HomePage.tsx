@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
 import ProductTopFilter from '../../components/ProductList/ProductTopFilter/ProductTopFilter';
-import { getBrandsAndCategories, getProductsBySearch, sortProducts } from '../../helpers/filters.data';
+import { getBrandsAndCategories, getProductByPrice, getProductByStock, getProductsBySearch, sortProducts } from '../../helpers/filters.data';
 import { Product, ResponseProduct } from '../../models/product.model';
 import { CardType } from '../../types/common.types';
 import styles from './HomePage.module.scss';
@@ -18,6 +18,8 @@ const HomePage = () => {
   const [searchParam, setSearchParam] = useState<string>('');
   const [categoryParam, setCategoryParam] = useState<string[]>([]);
   const [brandParam, setBrandParam] = useState<string[]>([]);
+  const [priceParam, setPriceParam] = useState<string[]>(['0', '1800'])
+  const [stockParam, setStockParam] = useState<string[]>(['0', '155'])
 
   const sortedProducts = sortProducts(products, sortParam);
   
@@ -31,7 +33,10 @@ const HomePage = () => {
       ? productByBrand.filter((product) => categoryParam.includes(product.category))
       : productByBrand;
 
-  const searchedProduct = getProductsBySearch(productByCategory, searchParam);
+  const { productByPrice, minPrice, maxPrice } = getProductByPrice(productByCategory, priceParam)
+  const { productByStock, minStock, maxStock } = getProductByStock(productByPrice, stockParam)
+
+  const searchedProduct = getProductsBySearch(productByStock, searchParam);
 
   const { brands, categories } = getBrandsAndCategories(products, searchedProduct);
 
@@ -76,6 +81,14 @@ const HomePage = () => {
               brands={brands}
               brandParam={brandParam}
               setBrandParam={setBrandParam}
+              priceParam={priceParam}
+              setPriceParam={setPriceParam}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
+              stockParam={stockParam}
+              setStockParam={setStockParam}
+              minStock={minStock}
+              maxStock={maxStock}
             />
           </aside>
           <div className={styles.right}>

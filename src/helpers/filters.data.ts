@@ -85,3 +85,36 @@ export const getBrandsAndCategories = (
   });
   return { categories, brands };
 };
+
+
+export const getProductByPrice = (
+  products: Product[], 
+  priceParam: string[]): { 
+    productByPrice: Product[], 
+    minPrice: number, 
+    maxPrice: number
+  } => {
+  const minPriceParam = Math.min(...priceParam.map(e => +e))
+  const maxPriceParam = Math.max(...priceParam.map(e => +e))
+  const productByPrice = products.filter(product => minPriceParam <= product.price && product.price <= maxPriceParam)
+  const minPrice = Math.min(...productByPrice.map(product => +product.price))
+  const maxPrice = Math.max(...productByPrice.map(product => +product.price))
+
+  return { productByPrice, minPrice, maxPrice }
+}
+
+export const getProductByStock = (
+  products: Product[], 
+  stockParam: string[]): { 
+    productByStock: Product[], 
+    minStock: number, 
+    maxStock: number
+  } => {
+  const minStockParam = Math.min(...stockParam.map(e => +e))
+  const maxStockParam = Math.max(...stockParam.map(e => +e))
+  const productByStock = products.filter(product => minStockParam <= product.stock && product.stock <= maxStockParam)
+  const minStock = Math.min(...productByStock.map(product => +product.stock))
+  const maxStock = Math.max(...productByStock.map(product => +product.stock))
+
+  return { productByStock, minStock, maxStock }
+}
