@@ -3,6 +3,7 @@ import cn from 'classnames';
 import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../providers/CartContextProvider';
+import { getPriceByLocale } from '../../helpers/price.util';
 
 const Header: FC = () => {
   const { state } = useContext(CartContext);
@@ -45,7 +46,7 @@ const Header: FC = () => {
             />
           </svg>
           <span className={styles.count}>{totalCount}</span>
-          <span className={styles.total_price}>{`${totalPrice} €`}</span>
+          <span className={styles.total_price}>{getPriceByLocale(totalPrice)}</span>
         </Link>
       </div>
     </header>

@@ -6,6 +6,7 @@ import cn from 'classnames';
 import Button from '../../ui/buttons/Button';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../../providers/CartContextProvider';
+import { getPriceByLocale } from '../../../helpers/price.util';
 
 interface ProductItemProps {
   typeCard: CardType;
@@ -46,7 +47,7 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
         {product.brand}
       </div>
       <div className={styles.product_buy}>
-        <div className={styles.price}>€{product.price}</div>
+        <div className={styles.price}>{getPriceByLocale(product.price)}</div>
         <Button onClick={addToCartHandler}>{isProductInCart ? 'Drop from cart' : 'Add to cart'}</Button>
       </div>
       <div className={styles.card__info}>

@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, PropsWithChildren, useReducer } from 'react';
+import { createContext, Dispatch, FC, PropsWithChildren, useEffect, useReducer } from 'react';
 import { Product } from '../models/product.model';
 
 export interface CartProduct {
@@ -16,16 +16,29 @@ type CartContextType = {
   dispatch: Dispatch<ActionType>;
 };
 
-const initialCartState: InitialCartState = {
-  promo: [],
-  products: [],
+const getInitialCartState = (): InitialCartState => {
+  const cartData: null | string = localStorage.getItem('cart');
+  if (cartData) {
+    const initialState = JSON.parse(cartData) as InitialCartState;
+    return initialState;
+  }
+  return {
+    promo: [],
+    products: [],
+  };
 };
+
+const initialCartState = getInitialCartState();
 
 type ActionType =
   | { type: 'addProduct'; payload: CartProduct }
   | { type: 'deleteProduct'; payload: CartProduct }
   | { type: 'incCount'; payload: CartProduct }
-  | { type: 'decCount'; payload: CartProduct };
+  | { type: 'decCount'; payload: CartProduct }
+  | {
+      type: 'setState';
+      payload: InitialCartState;
+    };
 
 export const CartContext = createContext<CartContextType>({
   state: initialCartState,
@@ -85,6 +98,9 @@ const CartContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
   const value = { state, dispatch };
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state));
+  }, [state]);
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 

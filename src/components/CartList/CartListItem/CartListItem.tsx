@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { getPriceByLocale } from '../../../helpers/price.util';
 import { CartProduct } from '../../../providers/CartContextProvider';
 import Button from '../../ui/buttons/Button';
 import styles from './CartListItem.module.scss';
@@ -31,7 +32,7 @@ const CartListItem: FC<CartListItemProps> = ({ product, incCountProduct, decCoun
             +
           </Button>
         </div>
-        <span className={styles.totalCoast}>{`${count * productInfo.price}€`}</span>
+        <span className={styles.totalCoast}>{getPriceByLocale(count * productInfo.price)}</span>
       </div>
     </div>
   );
