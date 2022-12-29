@@ -20,7 +20,6 @@ const CartList: FC<CartListProps> = ({ products, decCountProduct, incCountProduc
           decCountProduct={decCountProduct}
         />
       ))}
-      {products.length === 0 && <h3>Cart is empty</h3>}
     </div>
   );
 };

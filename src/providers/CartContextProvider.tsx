@@ -5,10 +5,11 @@ export interface CartProduct {
   productInfo: Product;
   count: number;
 }
-
+export type PromoCodeType = { title: string; value: number };
 interface InitialCartState {
-  promo: string[];
+  promoCode: PromoCodeType[];
   products: CartProduct[];
+  appliedPromoCode: PromoCodeType[];
 }
 
 type CartContextType = {
@@ -23,7 +24,11 @@ const getInitialCartState = (): InitialCartState => {
     return initialState;
   }
   return {
-    promo: [],
+    promoCode: [
+      { title: 'RSSCHOOL', value: 10 },
+      { title: 'WINTER2023', value: 15 },
+    ],
+    appliedPromoCode: [],
     products: [],
   };
 };
@@ -38,6 +43,14 @@ type ActionType =
   | {
       type: 'setState';
       payload: InitialCartState;
+    }
+  | {
+      type: 'applyPromoCode';
+      payload: PromoCodeType;
+    }
+  | {
+      type: 'cancelPromoCode';
+      payload: PromoCodeType;
     };
 
 export const CartContext = createContext<CartContextType>({
@@ -87,6 +100,18 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
           }
           return product;
         }),
+      };
+    }
+    case 'applyPromoCode': {
+      return {
+        ...state,
+        appliedPromoCode: [...state.appliedPromoCode, action.payload],
+      };
+    }
+    case 'cancelPromoCode': {
+      return {
+        ...state,
+        appliedPromoCode: state.appliedPromoCode.filter((code) => code.title !== action.payload.title),
       };
     }
     default:
