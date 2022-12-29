@@ -1,7 +1,7 @@
 .header {
   background-color: var(--white-color);
-  padding: 3rem 0;
-  box-shadow: 5px 5px 5px rgba($color: #000000, $alpha: 0.1);
+  padding: 2rem 0;
+  box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.1);
   .wrapper {
     display: flex;
     justify-content: space-between;
@@ -10,7 +10,7 @@
     .logo {
       display: flex;
       gap: 0.5rem;
-      font-size: 3rem;
+      font-size: 2.6rem;
       font-weight: bold;
       align-items: center;
       svg {
@@ -18,6 +18,49 @@
         top: -0.2rem;
         height: 4rem;
         width: 4rem;
+      }
+    }
+
+    .cart {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+      .total_price {
+        font-weight: bold;
+        font-size: 1.3rem;
+        color: var(--primary-color);
+      }
+      .count {
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+        background: var(--primary-color);
+        color: var(--white-color);
+        display: flex;
+        font-size: 1.3rem;
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 0.2rem solid var(--white-color);
+        transition: all 0.3s ease-in-out;
+      }
+      svg {
+        width: 4rem;
+        height: 4rem;
+      }
+      &:hover {
+        transform: scale(1.05);
+        .count {
+          transform: rotate(360deg);
+        }
+      }
+      &:active {
+        transform: scale(0.95);
       }
     }
   }

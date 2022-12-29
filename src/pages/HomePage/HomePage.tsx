@@ -22,6 +22,7 @@ const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [typeCard, setTypeCard] = useState<CardType>('vertical');
   const [sortParam, setSortParam] = useState<string>('');
   const [searchParam, setSearchParam] = useState<string>('');
@@ -66,8 +67,6 @@ const HomePage = () => {
       : productByBrand;
 
   const searchedProduct = getProductsBySearch(productByCategory, searchParam);
-
-  // useEffect(() => {}, [searchedProduct]);
 
   const { brands, categories } = getBrandsAndCategories(products, searchedProduct);
 
