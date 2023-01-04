@@ -60,16 +60,18 @@ const CartSummary: FC<CartSummaryProps> = ({
         onChange={(e) => setSearchedPromo(e.target.value)}
         placeholder="Enter promo code"
       />
-      <ul className={styles.promo_list}>
-        {foundPromo.map((code) => (
-          <li key={code.title} className={styles.promo_item}>
-            <span>{`${code.title} - ${code.value}%`}</span>{' '}
-            {!appliedPromoCode.find((promo) => promo.title === code.title) && (
-              <Button onClick={() => applyPromoCode(code)}>Apply</Button>
-            )}
-          </li>
-        ))}
-      </ul>
+      {foundPromo.length > 0 && (
+        <ul className={styles.promo_list}>
+          {foundPromo.map((code) => (
+            <li key={code.title} className={styles.promo_item}>
+              <span>{`${code.title} - ${code.value}%`}</span>{' '}
+              {!appliedPromoCode.find((promo) => promo.title === code.title) && (
+                <Button onClick={() => applyPromoCode(code)}>Apply</Button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
       <Button>Buy now</Button>
     </div>
   );

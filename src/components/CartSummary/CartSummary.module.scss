@@ -20,18 +20,20 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin: 0;
 
     .list_item {
       display: flex;
       justify-content: space-between;
-      align-items: end;
+      align-items: flex-end;
       font-weight: 500;
 
       .coast {
         display: flex;
         flex-direction: column;
-        align-items: end;
+        align-items: flex-end;
         .oldPrice {
+          color: gray;
           font-weight: 400;
           font-size: 1.2rem;
           text-decoration: line-through;
@@ -40,6 +42,7 @@
     }
   }
   .promo_list {
+    margin: 0;
     list-style-type: none;
     padding: 0;
     display: flex;
