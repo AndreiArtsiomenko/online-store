@@ -33,6 +33,11 @@ const ProductPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if(product) setProductPhoto(product.images[0]);
+  }, [product]);
+
   return (
     <div className='container'>
       {product && <div className={styles.link_navigation}>
@@ -51,14 +56,14 @@ const ProductPage = () => {
         <div className={styles.content}>
           <div className={styles.photos_box}>
             <div className={styles.slides_photos}>
-              {product.images.map((image) => (
-                <div onClick={() => setProductPhoto(image)} className={styles.photo} key = {product.id}>
+              {product.images.filter((image) => !image.includes('thumbnail')).map((image) => (
+                <div onClick={() => setProductPhoto(image)} className={styles.photo} key={image}>
                   <img src={image} alt={product.title} />
                 </div>
               ))}
             </div>
             <div className={styles.main_photo}>
-              <img src={productPhoto || product.thumbnail} alt={product.title} />
+              <img src={productPhoto} alt={product.title} />
             </div>
           </div>
           <div className={styles.info_box}>
