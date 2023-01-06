@@ -7,15 +7,17 @@ interface CartListProps {
   products: CartProduct[];
   decCountProduct: (product: CartProduct) => void;
   incCountProduct: (product: CartProduct) => void;
+  sequenceFirstEl: number;
 }
 
-const CartList: FC<CartListProps> = ({ products, decCountProduct, incCountProduct }) => {
+const CartList: FC<CartListProps> = ({ products, decCountProduct, incCountProduct, sequenceFirstEl }) => {
   return (
     <div className={styles.list}>
-      {products.map((product) => (
+      {products.map((product, index) => (
         <CartListItem
           key={product.productInfo.id}
           product={product}
+          sequence={index + 1 + sequenceFirstEl}
           incCountProduct={incCountProduct}
           decCountProduct={decCountProduct}
         />

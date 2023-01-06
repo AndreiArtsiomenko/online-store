@@ -11,6 +11,7 @@ interface CartFilterProps {
 const CartFilter: FC<CartFilterProps> = ({ value, setValue, options }) => {
   return (
     <div className={styles.wrapper}>
+      <h2 className={styles.title}>Cart</h2>
       <Select
         options={options}
         value={value}

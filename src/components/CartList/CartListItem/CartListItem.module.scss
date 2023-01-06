@@ -5,11 +5,33 @@
   background: var(--white-color);
   border-radius: 1rem;
   box-shadow: 0 0.1rem 0.2rem 0 rgba($color: #000000, $alpha: 0.16);
+  .sequence_box {
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    .sequence {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: gray;
+      flex: 0 0 auto;
+      width: 3rem;
+      border-radius: 50%;
+      height: 3rem;
+    }
+  }
   .thumbnail {
+    flex: 0 0 auto;
     width: 20rem;
     height: 15rem;
-    border-radius: 1rem;
-    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      object-fit: cover;
+    }
   }
   .info {
     display: flex;

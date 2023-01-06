@@ -11,6 +11,7 @@ interface CartSummaryProps {
   products: CartProduct[];
   cancelPromoCode: (promoCode: PromoCodeType) => void;
   applyPromoCode: (promoCode: PromoCodeType) => void;
+  buyNowHandler: (val: boolean) => void;
 }
 
 const CartSummary: FC<CartSummaryProps> = ({
@@ -19,6 +20,7 @@ const CartSummary: FC<CartSummaryProps> = ({
   appliedPromoCode,
   applyPromoCode,
   cancelPromoCode,
+  buyNowHandler,
 }) => {
   const totalCount = products.reduce((acc, product) => acc + product.count, 0);
 
@@ -54,25 +56,35 @@ const CartSummary: FC<CartSummaryProps> = ({
           ))}
         </ul>
       )}
-      <Input
-        type="text"
-        value={searchedPromo}
-        onChange={(e) => setSearchedPromo(e.target.value)}
-        placeholder="Enter promo code"
-      />
+      <div>
+        <Input
+          type="text"
+          value={searchedPromo}
+          onChange={(e) => setSearchedPromo(e.target.value)}
+          label="Enter promo code"
+          error="PROMO FOR TEST: RSSCHOOL or WINTER2023"
+        />
+      </div>
       {foundPromo.length > 0 && (
         <ul className={styles.promo_list}>
           {foundPromo.map((code) => (
             <li key={code.title} className={styles.promo_item}>
               <span>{`${code.title} - ${code.value}%`}</span>{' '}
               {!appliedPromoCode.find((promo) => promo.title === code.title) && (
-                <Button onClick={() => applyPromoCode(code)}>Apply</Button>
+                <Button
+                  onClick={() => {
+                    setSearchedPromo('');
+                    applyPromoCode(code);
+                  }}
+                >
+                  Apply
+                </Button>
               )}
             </li>
           ))}
         </ul>
       )}
-      <Button>Buy now</Button>
+      <Button onClick={() => buyNowHandler(true)}>Buy now</Button>
     </div>
   );
 };

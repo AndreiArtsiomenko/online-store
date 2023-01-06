@@ -5,7 +5,9 @@ export interface CartProduct {
   productInfo: Product;
   count: number;
 }
+
 export type PromoCodeType = { title: string; value: number };
+
 interface InitialCartState {
   promoCode: PromoCodeType[];
   products: CartProduct[];
@@ -51,6 +53,9 @@ type ActionType =
   | {
       type: 'cancelPromoCode';
       payload: PromoCodeType;
+    }
+  | {
+      type: 'clearCart';
     };
 
 export const CartContext = createContext<CartContextType>({
@@ -114,6 +119,13 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
         appliedPromoCode: state.appliedPromoCode.filter((code) => code.title !== action.payload.title),
       };
     }
+    case 'clearCart': {
+      return {
+        ...state,
+        appliedPromoCode: [],
+        products: [],
+      };
+    }
     default:
       return state;
   }
@@ -126,6 +138,7 @@ const CartContextProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state));
   }, [state]);
+
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 

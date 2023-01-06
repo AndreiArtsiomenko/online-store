@@ -1,0 +1,23 @@
+.wrapper {
+  .form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    .title {
+      font-weight: normal;
+    }
+
+    .personal {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .credit_card {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}

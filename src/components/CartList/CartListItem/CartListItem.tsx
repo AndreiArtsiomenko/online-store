@@ -8,13 +8,19 @@ interface CartListItemProps {
   product: CartProduct;
   incCountProduct: (product: CartProduct) => void;
   decCountProduct: (product: CartProduct) => void;
+  sequence: number;
 }
 
-const CartListItem: FC<CartListItemProps> = ({ product, incCountProduct, decCountProduct }) => {
+const CartListItem: FC<CartListItemProps> = ({ product, incCountProduct, decCountProduct, sequence }) => {
   const { productInfo, count } = product;
   return (
     <div className={styles.wrapper}>
-      <img className={styles.thumbnail} src={productInfo.thumbnail} alt={productInfo.title} />
+      <div className={styles.sequence_box}>
+        <span className={styles.sequence}>{sequence}</span>
+      </div>
+      <div className={styles.thumbnail}>
+        <img src={productInfo.thumbnail} alt={productInfo.title} />
+      </div>
       <div className={styles.info}>
         <span className={styles.title}>{productInfo.title}</span>
         <p className={styles.description}>{productInfo.description}</p>
