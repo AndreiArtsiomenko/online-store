@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: var(--white-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba($color: #000000, $alpha: 0.16);
+  .title {
+    margin: 0;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: flex-end;
+  padding: 2rem;
+  background: var(--white-color);
+  border-radius: 1rem;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba($color: #000000, $alpha: 0.16);
+
+  .title {
+    width: 100%;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 1px solid var(--light-color);
+    padding-bottom: 1rem;
+  }
+
+  .list {
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+
+    .list_item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-weight: 500;
+
+      .coast {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .oldPrice {
+          color: gray;
+          font-weight: 400;
+          font-size: 1.2rem;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+  .promo_list {
+    width: 100%;
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .promo_item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}

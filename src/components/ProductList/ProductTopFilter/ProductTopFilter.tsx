@@ -22,7 +22,6 @@ const ProductTopFilter: FC<ProductTopFilterProps> = ({
   searchParam,
   setSearchParam,
   setTypeCard,
-  typeCard,
 }) => {
   return (
     <div className={style.wrapper}>

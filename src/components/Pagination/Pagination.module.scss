@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .page_item {
+    width: 4rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid orange;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &_active {
+      background: orange;
+      color: white;
+    }
+
+    &:hover {
+      background: orange;
+      color: white;
+    }
+  }
+}

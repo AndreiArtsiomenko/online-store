@@ -1,0 +1,42 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.7);
+    z-index: 1;
+  }
+  .content {
+    overflow-y: scroll;
+    position: relative;
+    z-index: 3;
+    background: white;
+    max-width: 80vw;
+    max-height: 70vh;
+    border-radius: 0.3rem;
+    padding: 4rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .close_btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    cursor: pointer;
+    z-index: 2;
+    svg {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+}

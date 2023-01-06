@@ -1,10 +1,12 @@
-import { FC } from 'react';
+import { FC, MouseEvent, useContext } from 'react';
 import { Product } from '../../../models/product.model';
 import { CardType } from '../../../types/common.types';
 import styles from './ProductItem.module.scss';
 import cn from 'classnames';
 import Button from '../../ui/buttons/Button';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../../providers/CartContextProvider';
+import { getPriceByLocale } from '../../../helpers/price.util';
 
 interface ProductItemProps {
   typeCard: CardType;
@@ -14,6 +16,16 @@ interface ProductItemProps {
 const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   const isVertical = typeCard === 'vertical';
   const navigate = useNavigate();
+  const { state, dispatch } = useContext(CartContext);
+  const isProductInCart = state.products.find((cartProduct) => cartProduct.productInfo.id === product.id);
+  const addToCartHandler = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>): void => {
+    e.stopPropagation();
+    if (isProductInCart) {
+      dispatch({ type: 'deleteProduct', payload: { productInfo: product, count: 1 } });
+    } else {
+      dispatch({ type: 'addProduct', payload: { productInfo: product, count: 1 } });
+    }
+  };
   return (
     <div
       onClick={() => navigate(`products/${product.id}`)}
@@ -35,8 +47,8 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
         {product.brand}
       </div>
       <div className={styles.product_buy}>
-        <div className={styles.price}>€{product.price}</div>
-        <Button onClick={(e) => e.stopPropagation()}>Add to cart</Button>
+        <div className={styles.price}>{getPriceByLocale(product.price)}</div>
+        <Button onClick={addToCartHandler}>{isProductInCart ? 'Drop from cart' : 'Add to cart'}</Button>
       </div>
       <div className={styles.card__info}>
         <div className={cn(styles.card__item, styles.rating)}>

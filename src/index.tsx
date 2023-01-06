@@ -5,14 +5,15 @@ import './index.scss';
 import 'normalize.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CartContextProvider from './providers/CartContextProvider';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CartContextProvider>
+        <App />
+      </CartContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
