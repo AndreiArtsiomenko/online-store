@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { sortOptions } from '../../../helpers/filters.data';
 import { CardType } from '../../../types/common.types';
-import Button from '../../ui/buttons/Button';
+import ButtonView from '../../ui/buttons/ButtonView';
 import Input from '../../ui/Input/Input';
 import Select from '../../ui/selects/Select';
 import style from './ProductTopFilter.module.scss';
@@ -38,7 +38,7 @@ const ProductTopFilter: FC<ProductTopFilterProps> = ({
         onChange={e => setSearchParam(e.target.value)}
       />
       <div className={style.viewModeForm}>
-        <Button onClick={() => setTypeCard('horizontal')}>
+        <ButtonView onClick={() => setTypeCard('horizontal')}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
               fillRule="evenodd"
@@ -46,8 +46,8 @@ const ProductTopFilter: FC<ProductTopFilterProps> = ({
               clipRule="evenodd"
             />
           </svg>
-        </Button>
-        <Button onClick={() => setTypeCard('vertical')}>
+        </ButtonView>
+        <ButtonView onClick={() => setTypeCard('vertical')}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
               fillRule="evenodd"
@@ -55,7 +55,7 @@ const ProductTopFilter: FC<ProductTopFilterProps> = ({
               clipRule="evenodd"
             />
           </svg>
-        </Button>
+        </ButtonView>
       </div>
     </div>
   );

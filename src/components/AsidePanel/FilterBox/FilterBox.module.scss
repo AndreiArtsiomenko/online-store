@@ -19,9 +19,18 @@
     height: 20rem;
     overflow: hidden;
     overflow-y: scroll;
+
+    @media screen and (max-width: 680px) {
+      height: 13rem;
+    }
+
     .list_item {
       display: flex;
       justify-content: space-between;
+
+      @media screen and (max-width: 780px) {
+        font-size: 1.4rem;
+      }
 
       .label {
         display: flex;
