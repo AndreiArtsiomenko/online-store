@@ -8,13 +8,6 @@ interface ModalProps {
 }
 
 const Modal: FC<PropsWithChildren<ModalProps>> = ({ children, isOpen, setIsOpen }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflowY = 'hidden';
-    } else {
-      document.body.style.overflowY = 'scroll';
-    }
-  }, [isOpen]);
   if (!isOpen) return null;
   const modal = (
     <div className={styles.wrapper}>
