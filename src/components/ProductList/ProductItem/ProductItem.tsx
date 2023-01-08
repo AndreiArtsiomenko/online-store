@@ -14,9 +14,9 @@ interface ProductItemProps {
 }
 
 const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
+  const { state, dispatch } = useContext(CartContext);
   const isVertical = typeCard === 'vertical';
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(CartContext);
   const isProductInCart = state.products.find((cartProduct) => cartProduct.productInfo.id === product.id);
   const addToCartHandler = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>): void => {
     e.stopPropagation();
