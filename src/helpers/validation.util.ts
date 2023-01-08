@@ -4,7 +4,7 @@ const validEmail =
 export const validateName = (value: string): string | null => {
   if (value.split(' ').length < 2) {
     return 'Name must be 2 words';
-  } else if (value.split(' ').find((word) => word.length < 3) !== undefined) {
+  } else if (value.split(' ').find(word => word.length < 3) !== undefined) {
     return 'Word must be longer then 2 chars';
   } else {
     return null;
@@ -25,7 +25,7 @@ export const validatePhoneNumber = (value: string): string | null => {
 export const validateDeliveryAddress = (value: string): string | null => {
   if (value.split(' ').length < 3) {
     return 'Address must be 3 words';
-  } else if (value.split(' ').find((word) => word.length < 5) !== undefined) {
+  } else if (value.split(' ').find(word => word.length < 5) !== undefined) {
     return 'Word must be longer then 4 chars';
   } else {
     return null;

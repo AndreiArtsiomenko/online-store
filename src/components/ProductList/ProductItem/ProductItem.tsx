@@ -17,7 +17,9 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   const isVertical = typeCard === 'vertical';
   const navigate = useNavigate();
   const { state, dispatch } = useContext(CartContext);
-  const isProductInCart = state.products.find((cartProduct) => cartProduct.productInfo.id === product.id);
+  const isProductInCart = state.products.find(
+    cartProduct => cartProduct.productInfo.id === product.id,
+  );
   const addToCartHandler = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>): void => {
     e.stopPropagation();
     if (isProductInCart) {
@@ -26,10 +28,14 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
       dispatch({ type: 'addProduct', payload: { productInfo: product, count: 1 } });
     }
   };
+
   return (
     <div
       onClick={() => navigate(`products/${product.id}`)}
-      className={cn(styles.wrapper, { [styles.item_horizontal]: !isVertical, [styles.item_vertical]: isVertical })}
+      className={cn(styles.wrapper, {
+        [styles.item_horizontal]: !isVertical,
+        [styles.item_vertical]: isVertical,
+      })}
     >
       <div className={styles.box_img}>
         <img className={styles.img} src={product.thumbnail} alt={product.title} />
@@ -48,7 +54,9 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
       </div>
       <div className={styles.product_buy}>
         <div className={styles.price}>{getPriceByLocale(product.price)}</div>
-        <Button onClick={addToCartHandler}>{isProductInCart ? 'Drop from cart' : 'Add to cart'}</Button>
+        <Button onClick={addToCartHandler}>
+          {isProductInCart ? 'Drop from cart' : 'Add to cart'}
+        </Button>
       </div>
       <div className={styles.card__info}>
         <div className={cn(styles.card__item, styles.rating)}>
@@ -63,4 +71,5 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
     </div>
   );
 };
+
 export default ProductItem;

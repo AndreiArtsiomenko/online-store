@@ -25,6 +25,7 @@ export const sortOptions = [
 
 export const sortProducts = (products: Product[], sortParam: string): Product[] => {
   const [key, type] = sortParam.split('_') as [key: 'price' | 'rating', type: string];
+
   if (type === 'ASC') {
     return [...products].sort((a, b) => a[key] - b[key]);
   } else {
@@ -34,12 +35,14 @@ export const sortProducts = (products: Product[], sortParam: string): Product[] 
 
 export const getProductsBySearch = (products: Product[], searchParam: string): Product[] => {
   const lowerSearchParam = searchParam.toLowerCase();
-  return products.filter((product) => {
+
+  return products.filter(product => {
     for (const value of Object.values(product).slice(1, -2)) {
       if (String(value).toLowerCase().includes(lowerSearchParam)) {
         return true;
       }
     }
+
     return false;
   });
 };
@@ -51,9 +54,10 @@ export const getBrandsAndCategories = (
   const categories: CategoryType = {};
   const brands: CategoryType = {};
 
-  products.forEach((product) => {
+  products.forEach(product => {
     const categoryItem = categories[product.category.toLowerCase()];
     const brandItem = brands[product.brand.toLowerCase()];
+
     if (categoryItem) {
       categoryItem.count = categoryItem.count + 1;
     } else {
@@ -73,9 +77,10 @@ export const getBrandsAndCategories = (
       };
     }
   });
-  finallyProducts.forEach((product) => {
+  finallyProducts.forEach(product => {
     const brand = brands[product.brand.toLowerCase()];
     const category = categories[product.category.toLowerCase()];
+
     if (brand) {
       brand.findCount = brand.findCount + 1;
     }
@@ -83,6 +88,7 @@ export const getBrandsAndCategories = (
       category.findCount = category.findCount + 1;
     }
   });
+
   return { categories, brands };
 };
 
@@ -97,8 +103,12 @@ export const getProductByPriceByStock = (
   const maxStock = Math.max(...stockParams);
 
   const filteredProducts = products.filter(
-    (product) =>
-      product.price >= minPrice && product.price <= maxPrice && product.stock >= minStock && product.stock <= maxStock,
+    product =>
+      product.price >= minPrice &&
+      product.price <= maxPrice &&
+      product.stock >= minStock &&
+      product.stock <= maxStock,
   );
+
   return filteredProducts;
 };

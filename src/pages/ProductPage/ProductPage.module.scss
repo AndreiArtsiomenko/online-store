@@ -39,7 +39,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 1rem;
-      
+
       .photo {
         position: relative;
         width: 60%;
@@ -51,7 +51,7 @@
 
         &:before {
           background-color: none;
-          content: "";
+          content: '';
           display: block;
           height: 100%;
           left: -10%;
@@ -64,8 +64,8 @@
         &:hover:before {
           background-color: var(--primary-color);
         }
-        
-        & img{
+
+        & img {
           max-width: 100%;
           max-height: 100%;
         }
@@ -90,7 +90,7 @@
     flex-direction: column;
     justify-content: space-around;
     gap: 1.5rem;
-    
+
     .info_title_desc {
       font-weight: 500;
       padding-bottom: 1rem;
@@ -104,7 +104,7 @@
       border: 1px solid var(--primary-color);
       border-radius: 1rem;
 
-       .info_item {
+      .info_item {
         display: grid;
         grid-template-columns: 2fr 1fr;
         align-items: center;
@@ -116,8 +116,6 @@
         }
       }
     }
-    
-   
   }
 
   .buy_box {

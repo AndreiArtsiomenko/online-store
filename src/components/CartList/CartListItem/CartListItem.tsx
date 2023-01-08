@@ -11,8 +11,14 @@ interface CartListItemProps {
   sequence: number;
 }
 
-const CartListItem: FC<CartListItemProps> = ({ product, incCountProduct, decCountProduct, sequence }) => {
+const CartListItem: FC<CartListItemProps> = ({
+  product,
+  incCountProduct,
+  decCountProduct,
+  sequence,
+}) => {
   const { productInfo, count } = product;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.sequence_box}>
@@ -43,4 +49,5 @@ const CartListItem: FC<CartListItemProps> = ({ product, incCountProduct, decCoun
     </div>
   );
 };
+
 export default CartListItem;

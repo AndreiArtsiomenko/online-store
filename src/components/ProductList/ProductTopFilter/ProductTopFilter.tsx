@@ -28,11 +28,15 @@ const ProductTopFilter: FC<ProductTopFilterProps> = ({
       <Select
         placeholder="Sort by"
         options={sortOptions}
-        onChange={(e) => setSortParam(e.target.value)}
+        onChange={e => setSortParam(e.target.value)}
         value={sortParam}
       />
       <div>Found: {productsCount}</div>
-      <Input value={searchParam} placeholder="Search query" onChange={(e) => setSearchParam(e.target.value)} />
+      <Input
+        value={searchParam}
+        placeholder="Search query"
+        onChange={e => setSearchParam(e.target.value)}
+      />
       <div className={style.viewModeForm}>
         <Button onClick={() => setTypeCard('horizontal')}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

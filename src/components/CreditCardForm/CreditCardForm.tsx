@@ -11,7 +11,12 @@ interface CreditCardFormProps {
   formData: FormData;
 }
 
-const CreditCardForm: FC<CreditCardFormProps> = ({ changeInputHandler, errors, formData, blurInputHandler }) => {
+const CreditCardForm: FC<CreditCardFormProps> = ({
+  changeInputHandler,
+  errors,
+  formData,
+  blurInputHandler,
+}) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.form}>
@@ -49,4 +54,5 @@ const CreditCardForm: FC<CreditCardFormProps> = ({ changeInputHandler, errors, f
     </div>
   );
 };
+
 export default CreditCardForm;

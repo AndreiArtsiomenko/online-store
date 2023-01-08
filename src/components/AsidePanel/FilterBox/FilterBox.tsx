@@ -11,17 +11,19 @@ interface FilterBoxProps {
 const FilterBox: FC<FilterBoxProps> = ({ title, entities, params, setParam }) => {
   const changeHandler = (val: string) => {
     if (params.includes(val)) {
-      const newParam = params.filter((el) => el !== val);
+      const newParam = params.filter(el => el !== val);
+
       setParam(newParam);
     } else {
       setParam([...params, val]);
     }
   };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>{title}</div>
       <div className={styles.list}>
-        {Object.values(entities).map((param) => (
+        {Object.values(entities).map(param => (
           <div key={param.title} className={styles.list_item}>
             <label className={styles.label}>
               <input
@@ -41,4 +43,5 @@ const FilterBox: FC<FilterBoxProps> = ({ title, entities, params, setParam }) =>
     </div>
   );
 };
+
 export default FilterBox;

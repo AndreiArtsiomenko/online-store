@@ -25,11 +25,13 @@ const CartPage = () => {
     if (countProductOnPage === 0) return state.products;
     const start = currentPage * countProductOnPage;
     const end = start + countProductOnPage;
+
     return state.products.slice(start, end);
   }, [countProductOnPage, currentPage, state.products]);
 
   const maxPageCount = useMemo(() => {
     if (countProductOnPage === 0) return 1;
+
     return Math.ceil(state.products.length / countProductOnPage);
   }, [state.products.length, countProductOnPage]);
 
@@ -71,7 +73,11 @@ const CartPage = () => {
         {state.products.length > 0 && (
           <>
             <div className={styles.content}>
-              <CartFilter value={countProductOnPage} setValue={setCountProductOnPage} options={cartFilterOptions} />
+              <CartFilter
+                value={countProductOnPage}
+                setValue={setCountProductOnPage}
+                options={cartFilterOptions}
+              />
               <CartList
                 sequenceFirstEl={sequenceFirstEl}
                 products={cartProducts}
@@ -80,7 +86,11 @@ const CartPage = () => {
               />
               {maxPageCount > 1 && (
                 <div className={styles.pagination}>
-                  <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} maxPageCount={maxPageCount} />
+                  <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    maxPageCount={maxPageCount}
+                  />
                 </div>
               )}
             </div>

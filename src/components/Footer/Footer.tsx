@@ -43,12 +43,7 @@ const Footer: FC = () => {
           </a>
         </div>
         <div className={styles.createdAt}>Created 2022</div>
-        <a
-          className={styles.link}
-          target="_blank"
-          href="https://rs.school/js/"
-          rel="noreferrer"
-        >
+        <a className={styles.link} target="_blank" href="https://rs.school/js/" rel="noreferrer">
           <svg
             className="rsschool"
             width="80"
@@ -89,4 +84,5 @@ const Footer: FC = () => {
     </footer>
   );
 };
+
 export default Footer;
