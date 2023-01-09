@@ -31,11 +31,17 @@ const HomePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [typeCard, setTypeCard] = useState<CardType>((searchParams.get('typeCard') as CardType) || 'vertical');
+  const [typeCard, setTypeCard] = useState<CardType>(
+    (searchParams.get('typeCard') as CardType) || 'vertical',
+  );
   const [sortParam, setSortParam] = useState<string>(searchParams.get('sortParam') || '');
   const [searchParam, setSearchParam] = useState<string>(searchParams.get('searchParam') || '');
-  const [categoryParam, setCategoryParam] = useState<string[]>(searchParams.get('categoryParam')?.split(',') || []);
-  const [brandParam, setBrandParam] = useState<string[]>(searchParams.get('brandParam')?.split(',') || []);
+  const [categoryParam, setCategoryParam] = useState<string[]>(
+    searchParams.get('categoryParam')?.split(',') || [],
+  );
+  const [brandParam, setBrandParam] = useState<string[]>(
+    searchParams.get('brandParam')?.split(',') || [],
+  );
 
   const [priceParam, setPriceParam] = useState<DualSliderValueType>(initialDualSliderValue);
   const [stockParam, setStockParam] = useState<DualSliderValueType>(initialDualSliderValue);
@@ -56,11 +62,11 @@ const HomePage = () => {
     const priceQueryParams = searchParams
       .get('priceParam')
       ?.split(',')
-      .map((el) => Number(el));
+      .map(el => Number(el));
     const stockQueryParams = searchParams
       .get('stockParam')
       ?.split(',')
-      .map((el) => Number(el));
+      .map(el => Number(el));
 
     if (priceQueryParams) {
       setPriceParam(priceQueryParams as DualSliderValueType);
