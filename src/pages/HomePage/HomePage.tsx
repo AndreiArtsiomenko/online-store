@@ -31,18 +31,24 @@ const HomePage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [typeCard, setTypeCard] = useState<CardType>((searchParams.get('typeCard') as CardType) || 'vertical');
+  const [typeCard, setTypeCard] = useState<CardType>(
+    (searchParams.get('typeCard') as CardType) || 'vertical',
+  );
   const [sortParam, setSortParam] = useState<string>(searchParams.get('sortParam') || '');
   const [searchParam, setSearchParam] = useState<string>(searchParams.get('searchParam') || '');
-  const [categoryParam, setCategoryParam] = useState<string[]>(searchParams.get('categoryParam')?.split(',') || []);
-  const [brandParam, setBrandParam] = useState<string[]>(searchParams.get('brandParam')?.split(',') || []);
+  const [categoryParam, setCategoryParam] = useState<string[]>(
+    searchParams.get('categoryParam')?.split(',') || [],
+  );
+  const [brandParam, setBrandParam] = useState<string[]>(
+    searchParams.get('brandParam')?.split(',') || [],
+  );
 
   const [priceParam, setPriceParam] = useState<DualSliderValueType>(initialDualSliderValue);
   const [stockParam, setStockParam] = useState<DualSliderValueType>(initialDualSliderValue);
 
   const { minMaxPrice, minMaxStock } = useMemo(() => {
-    const priceValues = products.map((product) => product.price);
-    const stockValues = products.map((product) => product.stock);
+    const priceValues = products.map(product => product.price);
+    const stockValues = products.map(product => product.stock);
 
     const minMaxPrice = {
       min: Math.min(...priceValues),
@@ -56,11 +62,12 @@ const HomePage = () => {
     const priceQueryParams = searchParams
       .get('priceParam')
       ?.split(',')
-      .map((el) => Number(el));
+      .map(el => Number(el));
     const stockQueryParams = searchParams
       .get('stockParam')
       ?.split(',')
-      .map((el) => Number(el));
+      .map(el => Number(el));
+
     if (priceQueryParams) {
       setPriceParam(priceQueryParams as DualSliderValueType);
     } else {
@@ -71,6 +78,7 @@ const HomePage = () => {
     } else {
       setStockParam([minMaxStock.min, minMaxStock.max]);
     }
+
     return {
       minMaxPrice,
       minMaxStock,
@@ -83,12 +91,14 @@ const HomePage = () => {
 
   const productByBrand =
     brandParam.length > 0
-      ? productByPriceByStock.filter((product) => brandParam.includes(product.brand.toLocaleLowerCase()))
+      ? productByPriceByStock.filter(product =>
+          brandParam.includes(product.brand.toLocaleLowerCase()),
+        )
       : productByPriceByStock;
 
   const productByCategory =
     categoryParam.length > 0
-      ? productByBrand.filter((product) => categoryParam.includes(product.category))
+      ? productByBrand.filter(product => categoryParam.includes(product.category))
       : productByBrand;
 
   const searchedProduct = getProductsBySearch(productByCategory, searchParam);
@@ -107,7 +117,10 @@ const HomePage = () => {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const responseProduct = await axios.get<ResponseProduct>('https://dummyjson.com/products?limit=100');
+      const responseProduct = await axios.get<ResponseProduct>(
+        'https://dummyjson.com/products?limit=100',
+      );
+
       if (responseProduct.status !== 200) {
         throw new Error('Bad request');
       }
@@ -128,6 +141,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams();
+
     if (typeCard !== 'vertical') {
       params.append('typeCard', String(typeCard));
     } else {
