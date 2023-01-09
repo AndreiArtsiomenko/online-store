@@ -70,6 +70,7 @@ const CartPage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams();
+
     if (currentPage) {
       params.append('currentPage', String(currentPage));
     } else {

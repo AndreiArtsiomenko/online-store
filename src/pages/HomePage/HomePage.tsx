@@ -61,6 +61,7 @@ const HomePage = () => {
       .get('stockParam')
       ?.split(',')
       .map((el) => Number(el));
+
     if (priceQueryParams) {
       setPriceParam(priceQueryParams as DualSliderValueType);
     } else {
@@ -71,6 +72,7 @@ const HomePage = () => {
     } else {
       setStockParam([minMaxStock.min, minMaxStock.max]);
     }
+
     return {
       minMaxPrice,
       minMaxStock,
@@ -133,6 +135,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const params = new URLSearchParams();
+
     if (typeCard !== 'vertical') {
       params.append('typeCard', String(typeCard));
     } else {
