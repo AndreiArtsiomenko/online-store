@@ -17,7 +17,9 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   const { state, dispatch } = useContext(CartContext);
   const isVertical = typeCard === 'vertical';
   const navigate = useNavigate();
-  const isProductInCart = state.products.find((cartProduct) => cartProduct.productInfo.id === product.id);
+  const isProductInCart = state.products.find(
+    cartProduct => cartProduct.productInfo.id === product.id,
+  );
   const addToCartHandler = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>): void => {
     e.stopPropagation();
     if (isProductInCart) {

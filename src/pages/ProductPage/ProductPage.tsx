@@ -14,7 +14,9 @@ const ProductPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
-  const isProductInCart = state.products.find((cartProduct) => cartProduct.productInfo.id === product?.id);
+  const isProductInCart = state.products.find(
+    cartProduct => cartProduct.productInfo.id === product?.id,
+  );
 
   const fetchData = async (): Promise<void> => {
     try {
@@ -135,7 +137,9 @@ const ProductPage = () => {
             <div className={styles.buy_box}>
               <div className={styles.product_price}>€{product.price}</div>
               <div className={styles.buttons_box}>
-                <Button onClick={addToCartHandler}>{isProductInCart ? 'Drop from cart' : 'Add to cart'}</Button>
+                <Button onClick={addToCartHandler}>
+                  {isProductInCart ? 'Drop from cart' : 'Add to cart'}
+                </Button>
                 <Button onClick={byNowHandler}>Buy now</Button>
               </div>
             </div>

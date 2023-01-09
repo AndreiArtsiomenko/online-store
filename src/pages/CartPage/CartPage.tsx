@@ -22,7 +22,9 @@ const CartPage = () => {
   const [countProductOnPage, setCountProductOnPage] = useState<number>(
     Number(searchParams.get('countProductOnPage')) || 0,
   );
-  const [currentPage, setCurrentPage] = useState<number>(Number(searchParams.get('currentPage')) || 0);
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(searchParams.get('currentPage')) || 0,
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
