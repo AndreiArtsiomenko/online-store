@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  color: var(--grey-light-color);
+
+  .error_icon {
+    svg {
+        position: relative;
+        height: 15rem;
+        width: 15rem;
+      }
+  }
+
+  .error {
+    font-size: 10rem;
+  }
+
+  .text_error {
+    font-size: 3rem;
+  }
+}
