@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { CategoryType } from '../../helpers/filters.data';
 import { DualSliderValueType } from '../../pages/HomePage/HomePage';
 import Button from '../ui/buttons/Button';
@@ -37,9 +38,24 @@ const AsidePanel: FC<AsidePanelProps> = ({
   minMaxStock,
   minMaxPrice,
 }) => {
+  const [copyBtn, setCopyBtn] = useState(false);
+
+  const copyBtnHandler = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopyBtn(true);
+    setTimeout(() => {
+      setCopyBtn(false);
+    }, 1000);
+  };
+
   return (
     <div className={styles.wrapper}>
-      <Button onClick={resetFilters}>Reset Filter</Button>
+      <div className={styles.buttons}>
+        <Button onClick={resetFilters}>Reset Filter</Button>
+        <Button disabled={copyBtn} onClick={copyBtnHandler}>
+          {copyBtn ? 'Copied' : 'Copy link'}
+        </Button>
+      </div>
       <FilterBox
         entities={categories}
         params={categoryParam}
