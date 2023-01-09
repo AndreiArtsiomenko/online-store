@@ -22,6 +22,7 @@ const Pagination: FC<PaginationProps> = ({ currentPage, setCurrentPage, maxPageC
     if (currentPage === maxPageCount - 1) return;
     setCurrentPage(currentPage + 1);
   };
+
   return (
     <div className={styles.wrapper}>
       <Button onClick={prevBtnHandler}>Prev</Button>
@@ -38,4 +39,5 @@ const Pagination: FC<PaginationProps> = ({ currentPage, setCurrentPage, maxPageC
     </div>
   );
 };
+
 export default Pagination;

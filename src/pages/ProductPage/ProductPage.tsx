@@ -19,6 +19,7 @@ const ProductPage = () => {
   const fetchData = async (): Promise<void> => {
     try {
       const responseProduct = await axios.get<Product>(`https://dummyjson.com/products/${id}`);
+
       if (responseProduct.status !== 200) {
         throw new Error('Bad request');
       }
@@ -88,9 +89,13 @@ const ProductPage = () => {
             <div className={styles.photos_box}>
               <div className={styles.slides_photos}>
                 {product.images
-                  .filter((image) => !image.includes('thumbnail'))
-                  .map((image) => (
-                    <div onClick={() => setProductPhoto(image)} className={styles.photo} key={image}>
+                  .filter(image => !image.includes('thumbnail'))
+                  .map(image => (
+                    <div
+                      onClick={() => setProductPhoto(image)}
+                      className={styles.photo}
+                      key={image}
+                    >
                       <img src={image} alt={product.title} />
                     </div>
                   ))}

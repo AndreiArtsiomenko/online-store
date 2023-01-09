@@ -41,8 +41,8 @@ const HomePage = () => {
   const [stockParam, setStockParam] = useState<DualSliderValueType>(initialDualSliderValue);
 
   const { minMaxPrice, minMaxStock } = useMemo(() => {
-    const priceValues = products.map((product) => product.price);
-    const stockValues = products.map((product) => product.stock);
+    const priceValues = products.map(product => product.price);
+    const stockValues = products.map(product => product.stock);
 
     const minMaxPrice = {
       min: Math.min(...priceValues),
@@ -83,12 +83,14 @@ const HomePage = () => {
 
   const productByBrand =
     brandParam.length > 0
-      ? productByPriceByStock.filter((product) => brandParam.includes(product.brand.toLocaleLowerCase()))
+      ? productByPriceByStock.filter(product =>
+          brandParam.includes(product.brand.toLocaleLowerCase()),
+        )
       : productByPriceByStock;
 
   const productByCategory =
     categoryParam.length > 0
-      ? productByBrand.filter((product) => categoryParam.includes(product.category))
+      ? productByBrand.filter(product => categoryParam.includes(product.category))
       : productByBrand;
 
   const searchedProduct = getProductsBySearch(productByCategory, searchParam);
@@ -107,7 +109,10 @@ const HomePage = () => {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const responseProduct = await axios.get<ResponseProduct>('https://dummyjson.com/products?limit=100');
+      const responseProduct = await axios.get<ResponseProduct>(
+        'https://dummyjson.com/products?limit=100',
+      );
+
       if (responseProduct.status !== 200) {
         throw new Error('Bad request');
       }

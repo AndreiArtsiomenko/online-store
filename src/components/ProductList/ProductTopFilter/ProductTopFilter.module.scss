@@ -1,11 +1,30 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr) 10rem;
   align-items: center;
-  justify-items: auto;
+  justify-items: center;
   gap: 1rem;
   padding: 1.5rem;
   border-radius: 0.8rem;
   box-shadow: 0 0.1rem 0.2rem 0 rgba($color: #000000, $alpha: 0.16);
   background-color: var(--white-color);
+
+  .viewModeForm {
+    justify-self: end;
+    display: flex;
+    gap: 1rem;
+
+    @media screen and (max-width: 450px) {
+      grid-area: 2/2/3/4;
+      gap: 0.5rem;
+    }
+  }
+
+  @media screen and (max-width: 960px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

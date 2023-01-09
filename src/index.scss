@@ -27,6 +27,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
   background-color: var(--light-color);
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
@@ -40,4 +41,8 @@ body {
   max-width: 120rem;
   margin: 0 auto;
   padding: 0 3rem;
+
+  @media screen and (max-width: 780px) {
+    padding: 0 1.5rem;
+  }
 }

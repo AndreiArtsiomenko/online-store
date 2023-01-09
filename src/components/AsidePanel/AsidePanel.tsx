@@ -40,11 +40,27 @@ const AsidePanel: FC<AsidePanelProps> = ({
   return (
     <div className={styles.wrapper}>
       <Button onClick={resetFilters}>Reset Filter</Button>
-      <FilterBox entities={categories} params={categoryParam} setParam={setCategoryParam} title="Category" />
+      <FilterBox
+        entities={categories}
+        params={categoryParam}
+        setParam={setCategoryParam}
+        title="Category"
+      />
       <FilterBox entities={brands} params={brandParam} setParam={setBrandParam} title="Brand" />
-      <FilterSlider minMaxValues={minMaxPrice} params={priceParam} setParams={setPriceParam} title="Price" />
-      <FilterSlider minMaxValues={minMaxStock} params={stockParam} setParams={setStockParam} title="Stock" />
+      <FilterSlider
+        minMaxValues={minMaxPrice}
+        params={priceParam}
+        setParams={setPriceParam}
+        title="Price"
+      />
+      <FilterSlider
+        minMaxValues={minMaxStock}
+        params={stockParam}
+        setParams={setStockParam}
+        title="Stock"
+      />
     </div>
   );
 };
+
 export default AsidePanel;

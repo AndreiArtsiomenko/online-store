@@ -1,6 +1,7 @@
 import { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
 import styles from './Input.module.scss';
-interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+interface InputProps
+  extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   error?: string | null;
   label?: string;
 }
@@ -14,4 +15,5 @@ const Input: FC<InputProps> = ({ error, label, ...rest }) => {
     </label>
   );
 };
+
 export default Input;

@@ -41,7 +41,12 @@ export const typeCard = {
     </svg>
   ),
   '3': (
-    <svg xmlns="http://www.w3.org/2000/svg" height="800" width="1200" viewBox="-150 -249.37925 1300 1496.2755">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="800"
+      width="1200"
+      viewBox="-150 -249.37925 1300 1496.2755"
+    >
       <path
         d="M0 0h997.517v538.49l-49.375 77.147 49.375 68.661v313.219H0v-507.63l30.859-35.488L0 420.454z"
         fill="#016fd0"
@@ -57,7 +62,12 @@ export const typeCard = {
     </svg>
   ),
   '4': (
-    <svg xmlns="http://www.w3.org/2000/svg" height="800" width="1200" viewBox="-74.7 -40.204 647.4 241.224">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="800"
+      width="1200"
+      viewBox="-74.7 -40.204 647.4 241.224"
+    >
       <defs>
         <linearGradient
           x1="0"
@@ -77,7 +87,11 @@ export const typeCard = {
         </clipPath>
       </defs>
       <g clipPath="url(#a)" transform="matrix(4.98469 0 0 -4.98469 -1804.82 502.202)">
-        <path d="M0 0l98.437 36.252 22.394-60.809-98.436-36.252" fill="url(#b)" transform="translate(351.611 96.896)" />
+        <path
+          d="M0 0l98.437 36.252 22.394-60.809-98.436-36.252"
+          fill="url(#b)"
+          transform="translate(351.611 96.896)"
+        />
       </g>
     </svg>
   ),
@@ -87,8 +101,15 @@ export const getCreditCardIcon = (value: string): JSX.Element => {
   if (value in typeCard) {
     return typeCard[value as keyof typeof typeCard];
   }
+
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-5 -3 30 30" strokeWidth={1} stroke="currentColor">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="-5 -3 30 30"
+      strokeWidth={1}
+      stroke="currentColor"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -21,10 +21,13 @@ type CartContextType = {
 
 const getInitialCartState = (): InitialCartState => {
   const cartData: null | string = localStorage.getItem('cart');
+
   if (cartData) {
     const initialState = JSON.parse(cartData) as InitialCartState;
+
     return initialState;
   }
+
   return {
     promoCode: [
       { title: 'RSSCHOOL', value: 10 },
@@ -76,19 +79,22 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
     case 'deleteProduct': {
       return {
         ...state,
-        products: state.products.filter((product) => product.productInfo.id !== action.payload.productInfo.id),
+        products: state.products.filter(
+          product => product.productInfo.id !== action.payload.productInfo.id,
+        ),
       };
     }
     case 'incCount': {
       return {
         ...state,
-        products: state.products.map((product) => {
+        products: state.products.map(product => {
           if (product.productInfo.id === action.payload.productInfo.id) {
             return {
               ...product,
               count: product.count + 1,
             };
           }
+
           return product;
         }),
       };
@@ -96,13 +102,14 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
     case 'decCount': {
       return {
         ...state,
-        products: state.products.map((product) => {
+        products: state.products.map(product => {
           if (product.productInfo.id === action.payload.productInfo.id) {
             return {
               ...product,
               count: product.count - 1,
             };
           }
+
           return product;
         }),
       };
@@ -116,7 +123,9 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
     case 'cancelPromoCode': {
       return {
         ...state,
-        appliedPromoCode: state.appliedPromoCode.filter((code) => code.title !== action.payload.title),
+        appliedPromoCode: state.appliedPromoCode.filter(
+          code => code.title !== action.payload.title,
+        ),
       };
     }
     case 'clearCart': {

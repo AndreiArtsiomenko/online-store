@@ -1,7 +1,8 @@
 import { DetailedHTMLProps, FC, SelectHTMLAttributes } from 'react';
 import styles from './Select.module.scss';
 
-interface SelectProps extends DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+interface SelectProps
+  extends DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
   options: {
     id: number;
     value: string;
@@ -15,7 +16,7 @@ const Select: FC<SelectProps> = ({ options, placeholder, value, ...rest }) => {
       <option disabled value="">
         {placeholder}
       </option>
-      {options.map((option) => (
+      {options.map(option => (
         <option key={option.id} value={option.value}>
           {option.name}
         </option>
