@@ -6,7 +6,11 @@ interface ButtonProps
   btnType?: 'primary' | 'ghost' | 'outline';
 }
 
-const ButtonView: FC<PropsWithChildren<ButtonProps>> = ({ btnType = 'primary', children, ...rest }) => {
+const ButtonView: FC<PropsWithChildren<ButtonProps>> = ({
+  btnType = 'primary',
+  children,
+  ...rest
+}) => {
   return (
     <button {...rest} className={cn(styles.button, styles[btnType])}>
       {children}
