@@ -7,11 +7,18 @@
   }
 }
 
+.empty_list {
+  text-align: center;
+}
+
 .list_vertical {
   grid-template-columns: repeat(3, minmax(10rem, 1fr));
 
   @media screen and (max-width: 980px) {
     grid-template-columns: repeat(2, minmax(10rem, 1fr));
+  }
+  @media screen and (max-width: 680px) {
+    grid-template-columns: repeat(1, minmax(10rem, 1fr));
   }
 }
 

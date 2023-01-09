@@ -58,7 +58,7 @@ const CartPage = () => {
     if (product.count > 1) {
       dispatch({ type: 'decCount', payload: product });
     } else {
-      dispatch({ type: 'deleteProduct', payload: product });
+      dispatch({ type: 'deleteProduct', payload: product.productInfo.id });
     }
   };
 
@@ -115,15 +115,13 @@ const CartPage = () => {
                 incCountProduct={incCountProduct}
                 decCountProduct={decCountProduct}
               />
-              {maxPageCount > 1 && (
-                <div className={styles.pagination}>
-                  <Pagination
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    maxPageCount={maxPageCount}
-                  />
-                </div>
-              )}
+              <div className={styles.pagination}>
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  maxPageCount={maxPageCount}
+                />
+              </div>
             </div>
             <aside className={styles.summary}>
               <CartSummary

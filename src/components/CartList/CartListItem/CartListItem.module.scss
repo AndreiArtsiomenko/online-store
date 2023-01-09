@@ -71,3 +71,10 @@
     }
   }
 }
+@media screen and (max-width: 680px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

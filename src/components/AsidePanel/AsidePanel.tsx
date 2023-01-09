@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { CategoryType } from '../../helpers/filters.data';
 import { DualSliderValueType } from '../../pages/HomePage/HomePage';
 import Button from '../ui/buttons/Button';
