@@ -15,10 +15,11 @@ const CartFilter: FC<CartFilterProps> = ({ value, setValue, options }) => {
       <Select
         options={options}
         value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
+        onChange={e => setValue(Number(e.target.value))}
         placeholder="Show to"
       />
     </div>
   );
 };
+
 export default CartFilter;

@@ -4,6 +4,7 @@
   border: 1px solid var(--primary-color);
   border-radius: 1rem;
   overflow: hidden;
+
   .title {
     text-align: center;
     font-weight: bold;
@@ -11,6 +12,7 @@
     padding: 0.5rem 0;
     background-color: var(--primary-color);
   }
+
   .list {
     padding: 0.5rem;
     display: flex;
@@ -19,9 +21,18 @@
     height: 20rem;
     overflow: hidden;
     overflow-y: scroll;
+
+    @media screen and (max-width: 680px) {
+      height: 13rem;
+    }
+
     .list_item {
       display: flex;
       justify-content: space-between;
+
+      @media screen and (max-width: 780px) {
+        font-size: 1.4rem;
+      }
 
       .label {
         display: flex;
@@ -29,8 +40,8 @@
         text-transform: capitalize;
 
         .input {
-          width: 2rem;
-          height: 2rem;
+          min-width: 2rem;
+          min-height: 2rem;
         }
       }
     }

@@ -27,9 +27,13 @@ const CartSummary: FC<CartSummaryProps> = ({
   const [searchedPromo, setSearchedPromo] = useState('');
 
   const discount = appliedPromoCode.reduce((acc, code) => acc + code.value, 0);
-  const foundPromo = promoCodes.filter((promoCode) => promoCode.title === searchedPromo);
-  const totalPrice = products.reduce((acc, product) => acc + product.productInfo.price * product.count, 0);
+  const foundPromo = promoCodes.filter(promoCode => promoCode.title === searchedPromo);
+  const totalPrice = products.reduce(
+    (acc, product) => acc + product.productInfo.price * product.count,
+    0,
+  );
   const totalPriceWithDiscount = totalPrice - (totalPrice * discount) / 100;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>Summary</div>
@@ -41,14 +45,16 @@ const CartSummary: FC<CartSummaryProps> = ({
         <li className={styles.list_item}>
           <span>Total coast:</span>
           <div className={styles.coast}>
-            {discount !== 0 && <span className={styles.oldPrice}>{getPriceByLocale(totalPrice)}</span>}
+            {discount !== 0 && (
+              <span className={styles.oldPrice}>{getPriceByLocale(totalPrice)}</span>
+            )}
             <span>{getPriceByLocale(totalPriceWithDiscount)}</span>
           </div>
         </li>
       </ul>
       {appliedPromoCode.length > 0 && (
         <ul className={styles.promo_list}>
-          {appliedPromoCode.map((code) => (
+          {appliedPromoCode.map(code => (
             <li key={code.title} className={styles.promo_item}>
               <span>{`${code.title} - ${code.value}%`}</span>
               <Button onClick={() => cancelPromoCode(code)}>Cancel</Button>
@@ -60,17 +66,17 @@ const CartSummary: FC<CartSummaryProps> = ({
         <Input
           type="text"
           value={searchedPromo}
-          onChange={(e) => setSearchedPromo(e.target.value)}
+          onChange={e => setSearchedPromo(e.target.value)}
           label="Enter promo code"
           error="PROMO FOR TEST: RSSCHOOL or WINTER2023"
         />
       </div>
       {foundPromo.length > 0 && (
         <ul className={styles.promo_list}>
-          {foundPromo.map((code) => (
+          {foundPromo.map(code => (
             <li key={code.title} className={styles.promo_item}>
               <span>{`${code.title} - ${code.value}%`}</span>{' '}
-              {!appliedPromoCode.find((promo) => promo.title === code.title) && (
+              {!appliedPromoCode.find(promo => promo.title === code.title) && (
                 <Button
                   onClick={() => {
                     setSearchedPromo('');
@@ -88,4 +94,5 @@ const CartSummary: FC<CartSummaryProps> = ({
     </div>
   );
 };
+
 export default CartSummary;

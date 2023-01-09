@@ -10,7 +10,12 @@ interface CartListProps {
   sequenceFirstEl: number;
 }
 
-const CartList: FC<CartListProps> = ({ products, decCountProduct, incCountProduct, sequenceFirstEl }) => {
+const CartList: FC<CartListProps> = ({
+  products,
+  decCountProduct,
+  incCountProduct,
+  sequenceFirstEl,
+}) => {
   return (
     <div className={styles.list}>
       {products.map((product, index) => (
@@ -25,4 +30,5 @@ const CartList: FC<CartListProps> = ({ products, decCountProduct, incCountProduc
     </div>
   );
 };
+
 export default CartList;

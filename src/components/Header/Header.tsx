@@ -7,8 +7,12 @@ import { getPriceByLocale } from '../../helpers/price.util';
 
 const Header: FC = () => {
   const { state } = useContext(CartContext);
-  const totalPrice = state.products.reduce((acc, product) => acc + product.productInfo.price * product.count, 0);
+  const totalPrice = state.products.reduce(
+    (acc, product) => acc + product.productInfo.price * product.count,
+    0,
+  );
   const totalCount = state.products.reduce((acc, product) => acc + product.count, 0);
+
   return (
     <header className={styles.header}>
       <div className={cn('container', styles.wrapper)}>
@@ -52,4 +56,5 @@ const Header: FC = () => {
     </header>
   );
 };
+
 export default Header;

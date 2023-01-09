@@ -70,49 +70,49 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
   const validate = (key: string, value: string): void => {
     switch (key as keyof ErrorFormData) {
       case 'name': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateName(value),
         }));
         break;
       }
       case 'phoneNumber': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validatePhoneNumber(value),
         }));
         break;
       }
       case 'deliveryAddress': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateDeliveryAddress(value),
         }));
         break;
       }
       case 'email': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateEmail(value),
         }));
         break;
       }
       case 'cardNumber': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateCardNumber(value),
         }));
         break;
       }
       case 'expiration': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateExpiration(value),
         }));
         break;
       }
       case 'secureCode': {
-        setErrorFormData((data) => ({
+        setErrorFormData(data => ({
           ...data,
           [key]: validateSecureCode(value),
         }));
@@ -126,6 +126,7 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
   const changeInputHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     const name = e.target.name;
     const value = e.target.value;
+
     switch (name) {
       case 'cardNumber': {
         if ('0123456789 '.includes(value.slice(-1)) && value.length < 20) {
@@ -133,6 +134,7 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
             .replace(/\s/g, '')
             .match(/.{1,4}/g)
             ?.join(' ') as string;
+
           setFormData({
             ...formData,
             [name]: newValue || '',
@@ -155,6 +157,7 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
             .replace('/', '')
             .match(/.{1,2}/g)
             ?.join('/') as string;
+
           setFormData({
             ...formData,
             [name]: newValue || '',
@@ -174,6 +177,7 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
   const blurInputHandler = (e: FocusEvent<HTMLInputElement>): void => {
     const name = e.target.name;
     const value = e.target.value;
+
     validate(name, value);
   };
 
@@ -182,7 +186,8 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
     for (const key in formData) {
       validate(key, formData[key as keyof FormData]);
     }
-    const errors = Object.values(errorFormData).filter((err) => err !== null);
+    const errors = Object.values(errorFormData).filter(err => err !== null);
+
     if (errors.length > 0) return;
     setFormData(initialFormData);
     setErrorFormData(initialErrorFormData);
@@ -252,4 +257,5 @@ const CartModal: FC<CartModalProps> = ({ isOpen, setIsOpen }) => {
     </Modal>
   );
 };
+
 export default CartModal;

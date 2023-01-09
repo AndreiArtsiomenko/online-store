@@ -26,7 +26,7 @@ const FilterSlider: FC<FilterSliderProps> = ({ params, setParams, title, minMaxV
           min={minMaxValues.min}
           max={minMaxValues.max}
           value={params[0]}
-          onChange={(e) => {
+          onChange={e => {
             setParams([+e.target.value, params[1]]);
           }}
         />
@@ -37,7 +37,7 @@ const FilterSlider: FC<FilterSliderProps> = ({ params, setParams, title, minMaxV
           min={minMaxValues.min}
           max={minMaxValues.max}
           value={params[1]}
-          onChange={(e) => {
+          onChange={e => {
             setParams([params[0], +e.target.value]);
           }}
         />
