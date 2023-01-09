@@ -1,5 +1,4 @@
 import styles from './CartPage.module.scss';
-import cn from 'classnames';
 import CartList from '../../components/CartList/CartList';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { CartContext, CartProduct, PromoCodeType } from '../../providers/CartContextProvider';
@@ -7,6 +6,7 @@ import CartSummary from '../../components/CartSummary/CartSummary';
 import CartFilter from '../../components/CartFilter/CartFilter';
 import Pagination from '../../components/Pagination/Pagination';
 import CartModal from '../../components/CartModal/CartModal';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const cartFilterOptions = [
   { id: 1, name: 'All', value: '0' },
@@ -17,9 +17,16 @@ const cartFilterOptions = [
 
 const CartPage = () => {
   const { state, dispatch } = useContext(CartContext);
-  const [countProductOnPage, setCountProductOnPage] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const [searchParams] = useSearchParams();
+  const [countProductOnPage, setCountProductOnPage] = useState<number>(
+    Number(searchParams.get('countProductOnPage')) || 0,
+  );
+  const [currentPage, setCurrentPage] = useState<number>(Number(searchParams.get('currentPage')) || 0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const cartProducts = useMemo(() => {
     if (countProductOnPage === 0) return state.products;
@@ -62,6 +69,27 @@ const CartPage = () => {
   };
 
   useEffect(() => {
+    const params = new URLSearchParams();
+    if (currentPage) {
+      params.append('currentPage', String(currentPage));
+    } else {
+      params.delete('currentPage');
+    }
+    if (countProductOnPage) {
+      params.append('countProductOnPage', String(countProductOnPage));
+    } else {
+      params.delete('countProductOnPage');
+    }
+    navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
+  }, [currentPage, countProductOnPage]);
+
+  useEffect(() => {
+    if (location.state) {
+      setIsModalOpen(location.state.isModalOpen);
+    }
+  }, [location]);
+
+  useEffect(() => {
     if (cartProducts.length === 0 && currentPage >= maxPageCount && currentPage > 0) {
       setCurrentPage(maxPageCount - 1);
     }
@@ -69,9 +97,9 @@ const CartPage = () => {
 
   return (
     <>
-      <div className={cn('container', styles.wrapper)}>
+      <div className="container">
         {state.products.length > 0 && (
-          <>
+          <div className={styles.wrapper}>
             <div className={styles.content}>
               <CartFilter
                 value={countProductOnPage}
@@ -104,12 +132,11 @@ const CartPage = () => {
                 buyNowHandler={setIsModalOpen}
               />
             </aside>
-          </>
+          </div>
         )}
         {isModalOpen && <CartModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />}
+        {state.products.length === 0 && <div className={styles.title}>Cart is empty</div>}
       </div>
-
-      {state.products.length === 0 && <div className={styles.title}>Cart is empty</div>}
     </>
   );
 };
