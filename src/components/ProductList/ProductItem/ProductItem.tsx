@@ -23,7 +23,7 @@ const ProductItem: FC<ProductItemProps> = ({ typeCard, product }) => {
   const addToCartHandler = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>): void => {
     e.stopPropagation();
     if (isProductInCart) {
-      dispatch({ type: 'deleteProduct', payload: { productInfo: product, count: 1 } });
+      dispatch({ type: 'deleteProduct', payload: product.id });
     } else {
       dispatch({ type: 'addProduct', payload: { productInfo: product, count: 1 } });
     }

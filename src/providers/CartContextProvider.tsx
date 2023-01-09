@@ -42,7 +42,7 @@ const initialCartState = getInitialCartState();
 
 type ActionType =
   | { type: 'addProduct'; payload: CartProduct }
-  | { type: 'deleteProduct'; payload: CartProduct }
+  | { type: 'deleteProduct'; payload: number }
   | { type: 'incCount'; payload: CartProduct }
   | { type: 'decCount'; payload: CartProduct }
   | {
@@ -79,9 +79,7 @@ const cartReducer = (state: InitialCartState, action: ActionType): InitialCartSt
     case 'deleteProduct': {
       return {
         ...state,
-        products: state.products.filter(
-          product => product.productInfo.id !== action.payload.productInfo.id,
-        ),
+        products: state.products.filter(product => product.productInfo.id !== action.payload),
       };
     }
     case 'incCount': {

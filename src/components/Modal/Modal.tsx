@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './Modal.module.scss';
 

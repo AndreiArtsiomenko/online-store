@@ -180,43 +180,44 @@ const HomePage = () => {
     navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
   }, [typeCard, sortParam, searchParam, categoryParam, brandParam, priceParam, stockParam]);
 
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+  if (error) {
+    return <div className={styles.error}>Something went wrong!</div>;
+  }
+
   return (
     <div className={cn('container', styles.wrapper)}>
-      {!isLoading && !error && (
-        <>
-          <aside className={styles.left}>
-            <AsidePanel
-              resetFilters={resetFilter}
-              categories={categories}
-              categoryParam={categoryParam}
-              setCategoryParam={setCategoryParam}
-              brands={brands}
-              brandParam={brandParam}
-              setBrandParam={setBrandParam}
-              priceParam={priceParam}
-              setPriceParam={setPriceParam}
-              stockParam={stockParam}
-              setStockParam={setStockParam}
-              minMaxPrice={minMaxPrice}
-              minMaxStock={minMaxStock}
-            />
-          </aside>
-          <div className={styles.right}>
-            <ProductTopFilter
-              searchParam={searchParam}
-              setSearchParam={setSearchParam}
-              productsCount={searchedProduct.length}
-              sortParam={sortParam}
-              setSortParam={setSortParam}
-              typeCard={typeCard}
-              setTypeCard={setTypeCard}
-            />
-            <ProductList products={searchedProduct} typeCard={typeCard} />
-          </div>
-        </>
-      )}
-      {isLoading && <span>Loading...</span>}
-      {error && <span>Something went wrong!</span>}
+      <aside className={styles.left}>
+        <AsidePanel
+          resetFilters={resetFilter}
+          categories={categories}
+          categoryParam={categoryParam}
+          setCategoryParam={setCategoryParam}
+          brands={brands}
+          brandParam={brandParam}
+          setBrandParam={setBrandParam}
+          priceParam={priceParam}
+          setPriceParam={setPriceParam}
+          stockParam={stockParam}
+          setStockParam={setStockParam}
+          minMaxPrice={minMaxPrice}
+          minMaxStock={minMaxStock}
+        />
+      </aside>
+      <div className={styles.right}>
+        <ProductTopFilter
+          searchParam={searchParam}
+          setSearchParam={setSearchParam}
+          productsCount={searchedProduct.length}
+          sortParam={sortParam}
+          setSortParam={setSortParam}
+          typeCard={typeCard}
+          setTypeCard={setTypeCard}
+        />
+        <ProductList products={searchedProduct} typeCard={typeCard} />
+      </div>
     </div>
   );
 };

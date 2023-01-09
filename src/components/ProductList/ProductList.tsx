@@ -14,18 +14,20 @@ const ProductList: FC<ProductListProps> = ({ products, typeCard }) => {
   const isVertical = typeCard === 'vertical';
 
   return (
-    <div
-      className={
-        isVertical
-          ? cn(styles.wrapper, styles.list_vertical)
-          : cn(styles.wrapper, styles.list_horizontal)
-      }
-    >
-      {products.map(product => (
-        <ProductItem key={product.id} product={product} typeCard={typeCard} />
-      ))}
-      {products.length === 0 && <h2>Products not found</h2>}
-    </div>
+    <>
+      <div
+        className={
+          isVertical
+            ? cn(styles.wrapper, styles.list_vertical)
+            : cn(styles.wrapper, styles.list_horizontal)
+        }
+      >
+        {products.map(product => (
+          <ProductItem key={product.id} product={product} typeCard={typeCard} />
+        ))}
+      </div>
+      {products.length === 0 && <h2 className={styles.empty_list}>Products not found</h2>}
+    </>
   );
 };
 

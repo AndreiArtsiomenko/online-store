@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { getPriceByLocale } from '../../../helpers/price.util';
 import { CartProduct } from '../../../providers/CartContextProvider';
-import Button from '../../ui/buttons/Button';
+import ButtonView from '../../ui/buttons/ButtonView';
 import styles from './CartListItem.module.scss';
 
 interface CartListItemProps {
@@ -24,11 +25,13 @@ const CartListItem: FC<CartListItemProps> = ({
       <div className={styles.sequence_box}>
         <span className={styles.sequence}>{sequence}</span>
       </div>
-      <div className={styles.thumbnail}>
+      <Link to={`/products/${productInfo.id}`} className={styles.thumbnail}>
         <img src={productInfo.thumbnail} alt={productInfo.title} />
-      </div>
+      </Link>
       <div className={styles.info}>
-        <span className={styles.title}>{productInfo.title}</span>
+        <Link to={`/products/${productInfo.id}`} className={styles.title}>
+          {productInfo.title}
+        </Link>
         <p className={styles.description}>{productInfo.description}</p>
         <div className={styles.other_info}>
           <span>{`Rating: ${productInfo.rating}`}</span>
@@ -38,11 +41,32 @@ const CartListItem: FC<CartListItemProps> = ({
       <div className={styles.control_box}>
         <span className={styles.stock}>{`Stock: ${productInfo.stock}`}</span>
         <div className={styles.control}>
-          <Button onClick={() => decCountProduct(product)}>-</Button>
+          <ButtonView onClick={() => decCountProduct(product)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+            </svg>
+          </ButtonView>
           <span>{count}</span>
-          <Button disabled={count === productInfo.stock} onClick={() => incCountProduct(product)}>
-            +
-          </Button>
+          <ButtonView
+            disabled={count === productInfo.stock}
+            onClick={() => incCountProduct(product)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </ButtonView>
         </div>
         <span className={styles.totalCoast}>{getPriceByLocale(count * productInfo.price)}</span>
       </div>

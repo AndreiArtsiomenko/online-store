@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 import style from './FilterSlider.module.scss';
 import cn from 'classnames';
 import { DualSliderValueType } from '../../../pages/HomePage/HomePage';

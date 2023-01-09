@@ -48,7 +48,7 @@ const ProductPage = () => {
     e.stopPropagation();
     if (product) {
       if (isProductInCart) {
-        dispatch({ type: 'deleteProduct', payload: { productInfo: product, count: 1 } });
+        dispatch({ type: 'deleteProduct', payload: product.id });
       } else {
         dispatch({ type: 'addProduct', payload: { productInfo: product, count: 1 } });
       }
@@ -66,6 +66,13 @@ const ProductPage = () => {
       navigate('/cart', { state: { isModalOpen: true } });
     }
   };
+
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+  if (error) {
+    return <div className={styles.error}>Something went wrong!</div>;
+  }
 
   return (
     <div className="container">
@@ -146,8 +153,6 @@ const ProductPage = () => {
           </div>
         </div>
       )}
-      {isLoading && <span>Loading...</span>}
-      {error && <span>Something went wrong!</span>}
     </div>
   );
 };
